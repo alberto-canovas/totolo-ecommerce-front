@@ -1,0 +1,6 @@
+<p class="bg-red-400">productos-lista works!</p>
+<ul *ngIf="productos$ | async as productos" >
+    <li *ngFor="let product of productos" >
+        {{product.name}}
+    </li>
+</ul>
