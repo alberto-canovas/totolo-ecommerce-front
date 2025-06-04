@@ -1,2 +1,64 @@
-<h1>HOLA</h1>
-<productos-lista></productos-lista>
+<div class="min-h-screen bg-base-200 text-white">
+    <!-- Hero -->
+    <section class="hero min-h-screen bg-gradient-to-r from-neutral-900 via-zinc-800 to-neutral-700">
+      <div class="hero-content flex-col text-center px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-6xl font-extrabold tracking-tight drop-shadow-lg">Totolo 3D</h1>
+          <p class="mt-6 text-xl opacity-90 leading-relaxed">
+            Diseñamos e imprimimos en 3D piezas personalizadas, útiles y decorativas con calidad profesional.
+          </p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Ventajas destacadas -->
+    <section class="py-20 px-6 bg-base-100 text-neutral-content">
+      <h2 class="text-4xl font-bold text-center mb-16 tracking-wide">¿Por qué elegir Totolo 3D?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div class="card bg-neutral shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="card-body text-center">
+            <h3 class="card-title text-xl justify-center">Personalización Total</h3>
+            <p class="opacity-80 leading-relaxed">
+              Transformamos tus ideas en objetos únicos con diseño exclusivo.
+            </p>
+          </div>
+        </div>
+        <div class="card bg-neutral shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="card-body text-center">
+            <h3 class="card-title text-xl justify-center">Alta Precisión</h3>
+            <p class="opacity-80 leading-relaxed">
+              Impresiones detalladas con tecnología de vanguardia.
+            </p>
+          </div>
+        </div>
+        <div class="card bg-neutral shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="card-body text-center">
+            <h3 class="card-title text-xl justify-center">Envíos en 72h</h3>
+            <p class="opacity-80 leading-relaxed">
+              Recibe tu pedido en casa en menos de 3 días.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Productos Destacados -->
+    <section class="py-20 px-6 bg-base-200 text-white">
+      <h2 class="text-4xl font-bold text-center mb-16 tracking-wide">Productos Destacados</h2>
+      <productos-lista></productos-lista>
+    </section>
+  
+    <!-- Llamada a la acción -->
+    <section class="text-center py-20 bg-neutral">
+      <h2 class="text-3xl font-bold mb-6 tracking-wide">¿Tienes un proyecto en mente?</h2>
+      <p class="text-lg mb-8 opacity-90 max-w-xl mx-auto leading-relaxed">
+        Te ayudamos a hacerlo realidad con impresión 3D personalizada.
+      </p>
+      <a routerLink="/contacto" class="btn btn-primary text-white px-8 py-3 text-lg hover:scale-105 transition-transform duration-300">
+        Contáctanos
+      </a>
+    </section>
+  
+</div>
+
+<footer></footer>

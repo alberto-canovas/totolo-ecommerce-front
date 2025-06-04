@@ -1,21 +1,20 @@
-<ul *ngIf="productos$ | async as productos" >
-    <li *ngFor="let product of productos" >
-        
-        
-<div class="card bg-base-100 w-96 shadow-xl">
-  <figure>
-    <img
-      src="{{product.image}}"
-      alt="{{product.name}}" />
-  </figure>
-  <div class="card-body">
-    <h2 class="card-title">{{product.name}}</h2>
-    <p>{{product.description}}</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary">{{product.price}}</button>
+<div *ngIf="productos$ | async as productos" class="p-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div *ngFor="let product of productos" class="card bg-base-100 shadow-xl">
+      <figure>
+        <img
+          src="{{ product.image }}"
+          alt="{{ product.name }}"
+          class="h-48 w-full object-cover"
+        />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">{{ product.price }} €</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-    </li>
-</ul>
-
