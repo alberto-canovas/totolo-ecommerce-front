@@ -12,9 +12,34 @@
         <h2 class="card-title">{{ product.name }}</h2>
         <p>{{ product.description }}</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">{{ product.price }} €</button>
+          <div  class="btn btn-primary">{{ product.price }} €</div>
+          <button class="btn btn-primary" (click)="agregarAlCarrito(product)">Añadir al carrito</button>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> 
+
+
+
+<!-- 
+
+<div *ngIf="productos$ | async as productos">
+  <div *ngFor="let producto of productos" class="producto-item">
+    <h3>{{ producto.name }}</h3>
+    <p>{{ producto.description }}</p>
+    <p>Precio: €{{ producto.price }}</p>
+    <button (click)="agregarAlCarrito(producto)">Añadir al carrito</button>
+  </div>
+</div> -->
+
+
+
+<!-- <div *ngIf="productos$ | async as productos">
+  <div *ngFor="let producto of productos" class="producto-item">
+    <h3>{{ producto.name }}</h3>
+    <p>{{ producto.description }}</p>
+    <p>Precio: €{{ producto.price }}</p>
+    <button (click)="comprar(producto.id)">Comprar</button>
+  </div>
+</div> -->
