@@ -1,11 +1,14 @@
 
 <div class="dropdown dropdown-end">
-  <label tabindex="0" class="btn btn-ghost btn-circle">
-    <div class="indicator">
-      🛒
-      <span class="badge badge-sm indicator-item">{{ cart.length }}</span>
-    </div>
-  </label>
+   <label tabindex="0" class="btn btn-ghost btn-circle">
+      <div class="avatar">
+        <div class="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 relative">
+          <span class="badge badge-sm indicator-item absolute top-0 right-0">{{ cart.length }}</span>
+          <img src="https://cdn-icons-png.flaticon.com/512/5412/5412512.png" />
+        </div>
+      </div>
+    </label>
+
   <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-72 bg-base-100 shadow">
     <div class="card-body">
       <span class="font-bold text-lg">{{ cart.length }} producto(s)</span>
@@ -13,8 +16,13 @@
       <div *ngIf="cart.length > 0; else vacio">
         <ul class="divide-y divide-neutral">
           <li *ngFor="let producto of cart" class="py-2">
-            <p class="text-sm font-semibold">{{ producto.name }}</p>
-            <p class="text-xs opacity-80">{{ producto.price}} €</p>
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-sm font-semibold">{{ producto.name }}</p>
+                <p class="text-xs opacity-80">{{ producto.price }} €</p>
+              </div>
+              <span class="badge badge-sm">{{ producto.quantity }}</span>
+            </div>
           </li>
         </ul>
 

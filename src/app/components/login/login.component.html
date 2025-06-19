@@ -1,0 +1,60 @@
+<div class="min-h-screen flex items-center justify-center bg-base-200 px-4">
+  <div class="w-full max-w-md bg-base-100 p-8 rounded-lg shadow">
+    <h2 class="text-2xl font-bold text-center mb-6">Iniciar sesión</h2>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <!-- Usuario / Email -->
+      <div class="form-control mb-4">
+        <label class="label" for="username">
+          <span class="label-text">Usuario o Email</span>
+        </label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          class="input input-bordered w-full"
+          required
+          [(ngModel)]="credentials.username"
+          #username="ngModel"
+        />
+        <div class="text-red-500 text-sm mt-1" *ngIf="username.invalid && username.touched">
+          Este campo es obligatorio.
+        </div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="form-control mb-4">
+        <label class="label" for="password">
+          <span class="label-text">Contraseña</span>
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          class="input input-bordered w-full"
+          required
+          [(ngModel)]="credentials.password"
+          #password="ngModel"
+        />
+        <div class="text-red-500 text-sm mt-1" *ngIf="password.invalid && password.touched">
+          Este campo es obligatorio.
+        </div>
+      </div>
+
+      <!-- Enviar -->
+      <button type="submit" class="btn btn-primary w-full" [disabled]="loginForm.invalid">
+        Iniciar sesión
+      </button>
+
+      <!-- Olvidó contraseña -->
+      <div class="mt-4 text-center">
+        <a class="link link-primary text-sm" (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <!-- Mensaje de error -->
+      <div *ngIf="loginError" class="mt-4 text-center text-red-500 text-sm">
+        {{ loginError }}
+      </div>
+    </form>
+  </div>
+</div>

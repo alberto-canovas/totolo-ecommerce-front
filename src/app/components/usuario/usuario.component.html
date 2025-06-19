@@ -1,0 +1,19 @@
+<div class="dropdown dropdown-end">
+  <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+    <div class="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/266/266033.png" />
+    </div>
+  </label>
+
+  <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+    <ng-container *ngIf="isLoggedIn; else noSession">
+      <li class="text-center font-bold text-primary">{{ userName }}</li>
+      <li><a (click)="logout()">Cerrar sesión</a></li>
+    </ng-container>
+
+    <ng-template #noSession>
+      <li><a (click)="login()">Iniciar sesión</a></li>
+      <li><a (click)="register()">Registrarse</a></li>
+    </ng-template>
+  </ul>
+</div>
