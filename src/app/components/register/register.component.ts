@@ -27,6 +27,10 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  volverInicio() {
+  this.router.navigate(['/']);
+}
+
   onSubmit() {
   this.registerError = null;
   this.registerSuccess = null;

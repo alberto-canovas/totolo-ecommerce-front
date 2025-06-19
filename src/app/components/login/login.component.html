@@ -46,15 +46,21 @@
         Iniciar sesión
       </button>
 
+      <!-- Botón Volver -->
+      
+      
       <!-- Olvidó contraseña -->
       <div class="mt-4 text-center">
         <a class="link link-primary text-sm" (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
       </div>
-
+      
       <!-- Mensaje de error -->
       <div *ngIf="loginError" class="mt-4 text-center text-red-500 text-sm">
         {{ loginError }}
       </div>
     </form>
+    <button type="button" class="btn btn-outline w-full mt-2" (click)="volverInicio()">
+      Volver al inicio
+    </button>
   </div>
 </div>

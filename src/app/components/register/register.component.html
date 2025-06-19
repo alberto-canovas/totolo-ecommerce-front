@@ -81,6 +81,9 @@
         Registrarse
       </button>
 
+
+
+
       <!-- Mensajes de éxito / error del backend -->
       <div *ngIf="registerSuccess" class="mt-4 text-green-600 text-center">
         {{ registerSuccess }}
@@ -89,5 +92,8 @@
         {{ registerError }}
       </div>
     </form>
+          <button type="button" class="btn btn-outline w-full mt-2" (click)="volverInicio()">
+  Volver al inicio
+</button>
   </div>
 </div>

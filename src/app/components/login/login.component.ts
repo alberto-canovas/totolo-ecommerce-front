@@ -20,6 +20,10 @@ export class LoginComponent {
 
   constructor(private router: Router, private authService: AuthService) {}
 
+  volverInicio() {
+  this.router.navigate(['/']);
+}
+
   onSubmit() {
     this.authService.login(this.credentials).subscribe({
       next: (user) => {
