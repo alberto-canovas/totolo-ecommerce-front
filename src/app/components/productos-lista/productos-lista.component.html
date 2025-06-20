@@ -1,24 +1,31 @@
 <div *ngIf="productos$ | async as productos" class="p-6">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <div *ngFor="let product of productos" class="card bg-base-100 shadow-xl">
-      <figure>
-        <img
-          src="{{ product.image }}"
-          alt="{{ product.name }}"
-          class="h-48 w-full object-cover"
-        />
-      </figure>
+      
+      <!-- Imagen con enlace a la página de detalle -->
+      <a [routerLink]="['/detalle-producto', product.id]">
+        <figure>
+          <img
+            [src]="product.image"
+            [alt]="product.name"
+            class="h-48 w-full object-cover cursor-pointer"
+          />
+        </figure>
+      </a>
+
       <div class="card-body">
         <h2 class="card-title">{{ product.name }}</h2>
         <p>{{ product.description }}</p>
         <div class="card-actions justify-end">
-          <div  class="btn btn-primary">{{ product.price }} €</div>
-          <button class="btn btn-primary" (click)="agregarAlCarrito(product)">Añadir al carrito</button>
+          <div class="btn btn-primary">{{ product.price }} €</div>
+          <button class="btn btn-primary" (click)="agregarAlCarrito(product)">
+            Añadir al carrito
+          </button>
         </div>
       </div>
     </div>
   </div>
-</div> 
+</div>
 
 
 

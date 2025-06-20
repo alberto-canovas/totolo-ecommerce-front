@@ -25,11 +25,12 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { TotoloService } from '../../service/totolo.service';
 import { CartService, CartItem } from '../../service/cart.service';  // Ajusta la ruta
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'productos-lista',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './productos-lista.component.html',
   styleUrls: ['./productos-lista.component.css']
 })
