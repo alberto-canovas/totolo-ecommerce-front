@@ -42,8 +42,13 @@ export class ProductListAdminComponent {
     // Redirige a una página para crear producto nuevo (que deberás implementar)
     this.router.navigate(['/admin/product-create']);
   }
-  volverAlDashboard() {
-  this.router.navigate(['/admin/dashboard']);
-}
 
+  volverAlDashboard() {
+    this.router.navigate(['/admin/dashboard']);
+  }
+
+  onImageError(event: any) {
+    // Si la imagen falla al cargar, usar la imagen de Goku como fallback
+    event.target.src = '/images/goku.jpg';
+  }
 }

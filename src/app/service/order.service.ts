@@ -37,22 +37,16 @@ export class OrderService {
   //   return this.http.get<Order[]>(`${this.baseUrl}/all`);
   // }
 getAllOrders(): Observable<Order[]> {
-  return this.http.get<Order[]>(`${this.baseUrl}/all`, {
-    withCredentials: true
-  });
+  return this.http.get<Order[]>(`${this.baseUrl}/all`);
 }
 
   // Obtener pedidos del usuario (puedes mantener si quieres)
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.baseUrl, {
-      withCredentials: true
-    });
+    return this.http.get<Order[]>(this.baseUrl);
   }
 
   updateOrderStatus(id: number, status: string): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}/${id}/status?status=${status}`, {}, {
-      withCredentials: true
-    });
+    return this.http.put<void>(`${this.baseUrl}/${id}/status?status=${status}`, {});
   }
 
   // Crear un nuevo pedido
@@ -64,8 +58,6 @@ getAllOrders(): Observable<Order[]> {
         quantity: item.quantity
       }))
     };
-    return this.http.post<Order>(this.baseUrl, orderPayload, {
-      withCredentials: true
-    });
+    return this.http.post<Order>(this.baseUrl, orderPayload);
   }
 }

@@ -1,3 +1,4 @@
+<!-- Forzando actualización para refrescar estilos -->
 <div *ngIf="productos$ | async as productos" class="p-6">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <div *ngFor="let product of productos" class="card bg-base-100 shadow-xl">
@@ -5,21 +6,27 @@
       <!-- Imagen con enlace a la página de detalle -->
       <a [routerLink]="['/detalle-producto', product.id]">
         <figure>
-          <img
-            [src]="product.image"
-            [alt]="product.name"
-            class="h-48 w-full object-cover cursor-pointer"
-          />
+          <div class="product-image-container">
+            <img
+              [src]="product.image || '/images/goku.jpg'"
+              [alt]="product.name"
+              class="product-image h-64 w-full object-cover cursor-pointer"
+              (error)="onImageError($event)"
+            />
+          </div>
         </figure>
       </a>
 
       <div class="card-body">
         <h2 class="card-title">{{ product.name }}</h2>
         <p>{{ product.description }}</p>
-        <div class="card-actions justify-end">
-          <div class="btn btn-primary">{{ product.price }} €</div>
-          <button class="btn btn-primary" (click)="agregarAlCarrito(product)">
-            Añadir al carrito
+        <div class="card-actions justify-end items-center mt-4">
+          <span class="text-lg font-semibold text-white mr-4">{{ product.price }} €</span>
+          <button class="btn btn-primary group" (click)="agregarAlCarrito(product)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="ml-2">Añadir al carrito</span>
           </button>
         </div>
       </div>

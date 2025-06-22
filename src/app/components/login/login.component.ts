@@ -30,27 +30,18 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    console.log('Intentando login con:', this.credentials);
-    
     this.authService.login(this.credentials).subscribe({
       next: (user) => {
-        console.log('Login exitoso, usuario recibido:', user);
         this.authService.setCurrentUser(user);
         this.loginError = null;
 
-        console.log('Usuario guardado, tipo:', user.type);
-        console.log('Usuario actual después del login:', this.authService.getCurrentUser());
-
         if (user.type === 'ADMIN') {
-          console.log('Redirigiendo a dashboard de admin');
           this.router.navigate(['/admin/dashboard']);
         } else {
-          console.log('Redirigiendo a inicio');
           this.router.navigate(['/']);
         }
       },
       error: (err) => {
-        console.error('Error en login:', err);
         this.loginError = err.error || 'Error al iniciar sesión';
       }
     });

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private baseUrl = 'http://localhost:8080/totolo/v1';
-  private currentUser: any = null; // Aquí guardas el usuario logueado
+  private currentUser: any = null;
 
   constructor(private http: HttpClient) {}
 
@@ -17,14 +17,29 @@ export class AuthService {
   }
 
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, credentials, { withCredentials: true }).pipe(
-      tap(user => this.setCurrentUser(user))
+    // Crear las credenciales en formato base64 para HTTP Basic Auth
+    const authHeader = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
+    
+    return this.http.post(`${this.baseUrl}/login`, credentials, { 
+      headers: new HttpHeaders({
+        'Authorization': authHeader,
+        'Content-Type': 'application/json'
+      }),
+      withCredentials: true 
+    }).pipe(
+      tap(user => this.setCurrentUser(user, credentials))
     );
   }
 
-  setCurrentUser(user: any) {
+  setCurrentUser(user: any, credentials?: any) {
     this.currentUser = user;
-    localStorage.setItem('currentUser', JSON.stringify(user)); // persiste
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    
+    // Guardar las credenciales para futuras peticiones
+    if (credentials) {
+      const authData = btoa(credentials.username + ':' + credentials.password);
+      localStorage.setItem('authToken', authData);
+    }
   }
 
   getCurrentUser() {
@@ -40,10 +55,11 @@ export class AuthService {
   logout() {
     this.currentUser = null;
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('authToken');
   }
 
   isLoggedIn(): boolean {
-    return !!this.getCurrentUser();
+    return !!this.getCurrentUser() && !!localStorage.getItem('authToken');
   }
 
   isAdmin(): boolean {
@@ -51,7 +67,6 @@ export class AuthService {
     return user?.type === 'ADMIN';
   }
 
-  // Verificar si la sesión sigue activa en el backend
   checkSession(): Observable<any> {
     return this.http.get(`${this.baseUrl}/orders`, { withCredentials: true });
   }

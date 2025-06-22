@@ -10,6 +10,7 @@ import { ProductListAdminComponent } from './components/product-list-admin/produ
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },        
@@ -24,7 +25,7 @@ export const routes: Routes = [
   { path: 'admin/dashboard', loadComponent: () => import('./components/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
   { path: 'admin/order-list', loadComponent: () => import('./components/order-list-admin/order-list-admin.component').then(m => m.OrderListAdminComponent) },
   { path: 'my-orders', loadComponent: () => import('./components/my-orders/my-orders.component').then(m => m.MyOrdersComponent) },
-
+  { path: 'contacto', component: ContactoComponent },
   { path: '**', redirectTo: '' }                  
 ];
 

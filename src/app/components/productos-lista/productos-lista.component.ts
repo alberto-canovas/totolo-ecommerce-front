@@ -51,6 +51,11 @@ export class ProductosListaComponent {
     this.cartService.addToCart(item);
     // alert(`Se añadió ${producto.name} al carrito`);
   }
+
+  onImageError(event: any) {
+    // Si la imagen falla al cargar, usar la imagen de Goku como fallback
+    event.target.src = '/images/goku.jpg';
+  }
 }
 
 
