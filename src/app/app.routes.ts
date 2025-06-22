@@ -9,6 +9,7 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
 import { ProductListAdminComponent } from './components/product-list-admin/product-list-admin.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },        
@@ -16,11 +17,13 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'recuperar-password', component: RecuperarPasswordComponent },
   { path: 'detalle-producto/:id', component: DetalleProductoComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'admin/products', component: ProductListAdminComponent },
   { path: 'admin/product-create', component: ProductCreateComponent },
   { path: 'admin/product-edit/:id', component: ProductEditComponent },
   { path: 'admin/dashboard', loadComponent: () => import('./components/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
   { path: 'admin/order-list', loadComponent: () => import('./components/order-list-admin/order-list-admin.component').then(m => m.OrderListAdminComponent) },
+  { path: 'my-orders', loadComponent: () => import('./components/my-orders/my-orders.component').then(m => m.MyOrdersComponent) },
 
   { path: '**', redirectTo: '' }                  
 ];

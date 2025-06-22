@@ -1,0 +1,79 @@
+<div class="container mx-auto p-6 min-h-screen bg-gray-50">
+  <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 border-b pb-4">
+      <h1 class="text-3xl font-bold text-gray-800">Mis Pedidos</h1>
+      <button class="btn btn-outline btn-primary mt-4 sm:mt-0" (click)="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+        Volver al inicio
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-error shadow-lg">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>{{ errorMessage }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="orders$ | async as orders; else loading">
+      <div *ngIf="orders.length > 0; else noOrders" class="space-y-6">
+        <div *ngFor="let order of orders" class="card bg-base-100 border border-gray-200 shadow-md transition-shadow hover:shadow-xl">
+          <div class="card-body">
+            <div class="flex flex-col sm:flex-row justify-between items-start">
+              <div>
+                <h2 class="card-title text-xl text-primary">Pedido #{{ order.id }}</h2>
+                <p class="text-sm text-gray-500">
+                  Dirección de envío: <span class="font-medium">{{ order.address }}</span>
+                </p>
+              </div>
+              <div class="badge mt-2 sm:mt-0"
+                   [ngClass]="{
+                     'badge-warning': order.status === 'IN_PROCESS',
+                     'badge-success': order.status === 'SENT',
+                     'badge-error': order.status === 'CANCELLED'
+                   }">
+                {{ order.status }}
+              </div>
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <!-- Items del pedido -->
+            <div class="space-y-3">
+              <h3 class="font-semibold text-lg mb-2">Resumen de productos</h3>
+              <div *ngFor="let item of order.orderItems" class="flex justify-between items-center p-3 bg-gray-50 rounded-md">
+                <div>
+                  <p class="font-medium">{{ item.product?.name || 'Producto' }}</p>
+                  <p class="text-sm text-gray-600">Cantidad: {{ item.quantity }}</p>
+                </div>
+                <p class="font-semibold text-gray-800">{{ (item.price * item.quantity) | number:'1.2-2' }} €</p>
+              </div>
+            </div>
+
+            <!-- Total -->
+            <div class="flex justify-end items-center mt-4 pt-4 border-t border-gray-200">
+              <span class="text-lg font-bold mr-4">Total del Pedido:</span>
+              <span class="text-2xl font-bold text-primary">{{ getOrderTotal(order) | number:'1.2-2' }} €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <div class="text-center py-16">
+        <span class="loading loading-lg loading-spinner text-primary"></span>
+        <p class="mt-4 text-gray-600">Cargando tus pedidos...</p>
+      </div>
+    </ng-template>
+
+    <ng-template #noOrders>
+      <div class="text-center py-16 bg-gray-50 rounded-lg">
+        <svg class="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+        <h3 class="mt-4 text-2xl font-semibold text-gray-700">Aún no tienes pedidos</h3>
+        <p class="mt-2 text-gray-600">Parece que no has realizado ninguna compra todavía.</p>
+        <button class="btn btn-primary mt-6" routerLink="/">Explorar productos</button>
+      </div>
+    </ng-template>
+  </div>
+</div> 

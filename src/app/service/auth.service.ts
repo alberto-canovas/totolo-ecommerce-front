@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -16,7 +17,9 @@ export class AuthService {
   }
 
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, credentials);
+    return this.http.post(`${this.baseUrl}/login`, credentials, { withCredentials: true }).pipe(
+      tap(user => this.setCurrentUser(user))
+    );
   }
 
   setCurrentUser(user: any) {
@@ -44,8 +47,12 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-  const user = this.getCurrentUser();
-  return user?.type === 'ADMIN';
+    const user = this.getCurrentUser();
+    return user?.type === 'ADMIN';
   }
 
+  // Verificar si la sesión sigue activa en el backend
+  checkSession(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/orders`, { withCredentials: true });
+  }
 }

@@ -32,6 +32,10 @@ export class CartService {
     return this.loadCart();
   }
 
+  getItems(): CartItem[] {
+    return this.getCart();
+  }
+
   addToCart(item: CartItem) {
     const cart = this.loadCart();
     const existingItem = cart.find(ci => ci.productId === item.productId);

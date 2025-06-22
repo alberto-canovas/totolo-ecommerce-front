@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'admin-dashboard',
@@ -10,7 +11,10 @@ import { RouterModule, Router } from '@angular/router';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   irAProductos() {
     this.router.navigate(['/admin/products']);
@@ -18,5 +22,10 @@ export class AdminDashboardComponent {
 
   irAPedidos() {
     this.router.navigate(['/admin/order-list']);
+  }
+
+  cerrarSesion() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

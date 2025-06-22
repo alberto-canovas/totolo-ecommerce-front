@@ -46,7 +46,7 @@ export class ProductCreateComponent {
       next: () => {
         this.loading = false;
         alert('Producto creado correctamente');
-        this.router.navigate(['/admin/product-list']);
+        this.router.navigate(['/admin/products']);
       },
       error: (err) => {
         this.loading = false;
@@ -56,6 +56,6 @@ export class ProductCreateComponent {
   }
 
   cancelar() {
-    this.router.navigate(['/admin/product-list']);
+    this.router.navigate(['/admin/products']);
   }
 }

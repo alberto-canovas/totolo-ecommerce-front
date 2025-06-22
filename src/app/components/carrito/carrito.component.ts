@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { loadStripe } from '@stripe/stripe-js';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { CartItem, CartService } from '../../service/cart.service';
 
 @Component({
   selector: 'app-carrito',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.css']
 })
@@ -15,7 +16,10 @@ export class CarritoComponent {
   cart: CartItem[] = [];
   total = 0;
 
-  constructor(private cartService: CartService) {
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {
     this.cartService.cart$.subscribe(items => {
       this.cart = items;
       this.total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -24,6 +28,14 @@ export class CarritoComponent {
 
   vaciarCarrito() {
     this.cartService.clearCart();
+  }
+
+  irAlCheckout() {
+    if (this.cart.length > 0) {
+      this.router.navigate(['/checkout']);
+    } else {
+      alert('El carrito está vacío');
+    }
   }
 }
 

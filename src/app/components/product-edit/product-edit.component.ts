@@ -90,7 +90,7 @@ export class ProductEditComponent implements OnInit {
       next: () => {
         this.loading = false;
         alert('Producto actualizado correctamente');
-        this.router.navigate(['/admin/product-list']);
+        this.router.navigate(['/admin/products']);
       },
       error: (err) => {
         this.loading = false;
@@ -100,6 +100,6 @@ export class ProductEditComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['/admin/product-list']);
+    this.router.navigate(['/admin/products']);
   }
 }

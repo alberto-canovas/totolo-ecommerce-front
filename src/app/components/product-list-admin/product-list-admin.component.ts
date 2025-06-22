@@ -32,7 +32,7 @@ export class ProductListAdminComponent {
           this.productos$ = this.productService.getProducts();
         },
         error: (err) => {
-          alert('Error al borrar producto: ' + err.message);
+          //alert('Error al borrar producto: ' + err.message);
         },
       });
     }
@@ -42,4 +42,8 @@ export class ProductListAdminComponent {
     // Redirige a una página para crear producto nuevo (que deberás implementar)
     this.router.navigate(['/admin/product-create']);
   }
+  volverAlDashboard() {
+  this.router.navigate(['/admin/dashboard']);
+}
+
 }
