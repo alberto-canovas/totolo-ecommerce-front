@@ -42,4 +42,10 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getCurrentUser();
   }
+
+  isAdmin(): boolean {
+  const user = this.getCurrentUser();
+  return user?.type === 'ADMIN';
+  }
+
 }

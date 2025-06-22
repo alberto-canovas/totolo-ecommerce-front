@@ -6,9 +6,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,CommonModule],
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   credentials = {
@@ -20,24 +21,29 @@ export class LoginComponent {
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  volverInicio() {
-  this.router.navigate(['/']);
-}
+  volverInicio(): void {
+    this.router.navigate(['/']);
+  }
 
-  onSubmit() {
+  forgotPassword(): void {
+    this.router.navigate(['/recuperar-password']);
+  }
+
+  onSubmit(): void {
     this.authService.login(this.credentials).subscribe({
       next: (user) => {
         this.authService.setCurrentUser(user);
         this.loginError = null;
-        this.router.navigate(['/']); // Ir a home
+
+        if (user.type === 'ADMIN') {
+          this.router.navigate(['/admin/dashboard']);
+        } else {
+          this.router.navigate(['/']);
+        }
       },
       error: (err) => {
-        this.loginError = err.error;
+        this.loginError = err.error || 'Error al iniciar sesión';
       }
     });
-  }
-
-  forgotPassword() {
-    this.router.navigate(['/recuperar-password']);
   }
 }

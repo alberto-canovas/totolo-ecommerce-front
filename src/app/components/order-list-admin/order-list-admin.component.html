@@ -1,0 +1,20 @@
+<div *ngIf="pedidos$ | async as pedidos" class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Lista de pedidos</h2>
+
+  <div class="grid grid-cols-1 gap-4">
+    <div *ngFor="let pedido of pedidos" class="card bg-base-100 shadow-xl p-4">
+      <div class="card-body">
+        <h3 class="card-title">Pedido #{{ pedido.id }}</h3>
+        <p><strong>Cliente:</strong> {{ pedido.customerName }}</p>
+        <p><strong>Fecha:</strong> {{ pedido.date | date:'short' }}</p>
+        <p><strong>Estado:</strong> {{ pedido.status }}</p>
+
+        <div class="card-actions mt-4 space-x-2">
+          <button class="btn btn-warning" (click)="cambiarEstado(pedido.id, 'IN_PROCESS')">En proceso</button>
+          <button class="btn btn-info" (click)="cambiarEstado(pedido.id, 'SENT')">Enviado</button>
+          <button class="btn btn-error" (click)="cambiarEstado(pedido.id, 'CANCELLED')">Cancelado</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
